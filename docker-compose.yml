@@ -1,0 +1,45 @@
+# Levanta todo el sistema con un solo comando:  docker compose up --build
+# Cada variable tiene un valor por defecto, así que no hace falta crear un .env.
+# Para cambiar algún valor, copiar .env.example como .env y editarlo.
+# Las imágenes tienen versión fija para que dentro de un año levante igual que hoy.
+
+services:
+  postgres:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-colonia}
+      POSTGRES_USER: ${POSTGRES_USER:-colonia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-colonia_demo_cambiar}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Proveedor de identidad (OIDC). El realm con roles y usuarios demo se importa solo al arrancar.
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.0
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USERNAME:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin_demo_cambiar}
+    volumes:
+      - ./keycloak/realm-colonia.json:/opt/keycloak/data/import/realm-colonia.json:ro
+    ports:
+      - "8080:8080"
+
+  # Mock del padrón de residentes (sistema externo simulado). Respuestas en wiremock/mappings.
+  wiremock:
+    image: wiremock/wiremock:3.9.1
+    command: ["--global-response-templating", "--verbose"]
+    volumes:
+      - ./wiremock:/home/wiremock
+    ports:
+      - "8081:8080"
+
+  # El servicio "app" (backend + frontend) se suma en el issue #2.
+
+volumes:
+  postgres_data:

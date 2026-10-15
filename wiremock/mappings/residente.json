@@ -1,0 +1,1 @@
+{"request":{"method":"GET","urlPathPattern":"/residentes/(30111222|30222333|30333444)"},"response":{"status":200,"headers":{"Content-Type":"application/json"},"jsonBody":{"residente":true}}}
