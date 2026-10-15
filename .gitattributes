@@ -1,0 +1,6 @@
+# Finales de línea Unix en el repo: los archivos se usan dentro de contenedores Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.xlsx binary
+*.pdf binary

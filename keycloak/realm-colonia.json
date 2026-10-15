@@ -1,0 +1,98 @@
+{
+  "realm": "colonia",
+  "enabled": true,
+  "displayName": "Colonia de Vacaciones",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "tutor"
+      },
+      {
+        "name": "administrativo"
+      },
+      {
+        "name": "administrador_sistema"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "colonia-spa",
+      "name": "Colonia SPA",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://localhost:8000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8000"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "tutor1",
+      "enabled": true,
+      "email": "tutor1@demo.local",
+      "emailVerified": true,
+      "firstName": "Tutor",
+      "lastName": "Demo",
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Tutor123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "tutor"
+      ]
+    },
+    {
+      "username": "admin1",
+      "enabled": true,
+      "email": "admin1@demo.local",
+      "emailVerified": true,
+      "firstName": "Administrativo",
+      "lastName": "Demo",
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Admin123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "administrativo"
+      ]
+    },
+    {
+      "username": "sysadmin1",
+      "enabled": true,
+      "email": "sysadmin1@demo.local",
+      "emailVerified": true,
+      "firstName": "Administrador",
+      "lastName": "Sistema",
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "SysAdmin123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "administrador_sistema"
+      ]
+    }
+  ]
+}
