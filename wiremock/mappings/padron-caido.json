@@ -1,0 +1,1 @@
+{"request":{"method":"GET","urlPath":"/residentes/50000000"},"response":{"status":503,"headers":{"Content-Type":"application/json"},"jsonBody":{"error":"padron no disponible"}},"priority":1}
