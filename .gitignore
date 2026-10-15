@@ -1,0 +1,21 @@
+# Configuración local (los valores de ejemplo están en .env.example)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Editores y sistema
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Respaldos de draw.io
+*.drawio.bkp
+*.$*.drawio
