@@ -1,4 +1,5 @@
 from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,7 +8,12 @@ class Settings(BaseSettings):
     environment: str = "dev"
     temporada: int = 2027
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    database_url: str = "postgresql+psycopg://colonia:colonia@localhost:5432/colonia"
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        extra="ignore"
+    )
 
 
 @lru_cache
