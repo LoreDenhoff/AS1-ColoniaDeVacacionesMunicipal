@@ -39,7 +39,32 @@ services:
     ports:
       - "8081:8080"
 
-  # El servicio "app" (backend + frontend) se suma en el issue #2.
+  # Backend FastAPI (y, desde el issue #3, el frontend compilado). Al arrancar aplica migraciones y datos iniciales.
+  app:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-colonia}:${POSTGRES_PASSWORD:-colonia_demo_cambiar}@postgres:5432/${POSTGRES_DB:-colonia}
+      PADRON_BASE_URL: http://wiremock:8080
+      PADRON_TIMEOUT_SECONDS: ${PADRON_TIMEOUT_SECONDS:-3}
+      TEMPORADA: ${TEMPORADA:-2027}
+      KEYCLOAK_ISSUER_URL: http://localhost:8080/realms/colonia
+      KEYCLOAK_INTERNAL_URL: http://keycloak:8080/realms/colonia
+      KEYCLOAK_CLIENT_ID: colonia-spa
+      KEYCLOAK_PUBLIC_URL: http://localhost:8080
+      PUBLIC_APP_URL: http://localhost:8000
+      AUTH_ENABLED: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+      wiremock:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
 
 volumes:
   postgres_data:

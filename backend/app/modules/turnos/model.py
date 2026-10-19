@@ -6,8 +6,8 @@ from app.core.database import Base
 class Turno(Base):
     __tablename__ = "turnos"
     id: Mapped[int] = mapped_column(primary_key=True)
-    nombre: Mapped[str] = mapped_column(String(100), nullable=False)
-    sede: Mapped[str] = mapped_column(String(150), nullable=False)
+    nombre: Mapped[str] = mapped_column(String(120), nullable=False)
+    sede: Mapped[str] = mapped_column(String(120), nullable=False)
     fecha_desde: Mapped[date] = mapped_column(Date, nullable=False)
     fecha_hasta: Mapped[date] = mapped_column(Date, nullable=False)
     cupo_total: Mapped[int] = mapped_column(Integer, nullable=False)
