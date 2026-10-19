@@ -27,4 +27,4 @@ class Inscripcion(Base):
     posicion_espera: Mapped[int|None]=mapped_column(Integer,nullable=True)
     creado_por: Mapped[str]=mapped_column(String(120),nullable=False)
     creado_en: Mapped[datetime]=mapped_column(DateTime(timezone=True),server_default=func.now(),nullable=False)
-    turno=relationship("Turno",back_populates="inscripciones") 
+    turno=relationship("Turno",back_populates="inscripciones")
