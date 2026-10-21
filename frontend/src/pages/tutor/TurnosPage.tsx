@@ -29,7 +29,7 @@ const turnosEjemplo: Turno[] = [
 function TurnosPage() {
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-6xl">
+      <div className="w-full max-w-7xl">
 
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-slate-800">
