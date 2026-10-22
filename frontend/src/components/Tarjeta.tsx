@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom'
 import type { LucideIcon } from 'lucide-react'
 import { ChevronRight } from 'lucide-react'
@@ -50,8 +49,8 @@ function Tarjeta({
   )
 
   const estilos = `
-    flex min-h-[145px] items-center gap-4
-    rounded-2xl p-5 shadow-sm
+    flex min-h-[105px] items-center gap-4
+    rounded-2xl p-4 shadow-sm
     ${fondo}
   `
 

@@ -1,4 +1,3 @@
-
 import { NavLink } from 'react-router-dom'
 import {
   House,
@@ -10,9 +9,14 @@ import {
   Settings,
   Waves,
   Sun,
+  X,
 } from 'lucide-react'
 
-function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void
+}
+
+function Sidebar({ onNavigate }: SidebarProps) {
   const opciones = [
     { nombre: 'Inicio', ruta: '/', icono: House },
     { nombre: 'Inscripciones', ruta: '/inscripciones', icono: ClipboardList },
@@ -24,9 +28,19 @@ function Sidebar() {
   ]
 
   return (
-    <aside className="flex min-h-screen w-60 shrink-0 flex-col bg-[#172E4D] text-white">
+    <aside className="flex h-full min-h-dvh w-60 flex-col bg-[#172E4D] text-white">
 
-      {/* Logo de la colonia */}
+      <div className="flex justify-end px-4 pt-3 lg:hidden">
+        <button
+          type="button"
+          onClick={onNavigate}
+          aria-label="Cerrar menú"
+          className="rounded-lg p-2 hover:bg-white/10"
+        >
+          <X size={24} />
+        </button>
+      </div>
+
       <div className="px-6 pb-8 pt-8 text-center">
         <div className="mb-3 flex flex-col items-center">
           <Sun size={52} className="text-yellow-400" />
@@ -44,7 +58,6 @@ function Sidebar() {
         </p>
       </div>
 
-      {/* Opciones de navegación */}
       <nav
         className="flex-1 space-y-2 px-3"
         aria-label="Menú principal"
@@ -57,6 +70,7 @@ function Sidebar() {
               key={opcion.ruta}
               to={opcion.ruta}
               end={opcion.ruta === '/'}
+              onClick={onNavigate}
               className={({ isActive }) =>
                 `flex items-center gap-4 rounded-xl px-4 py-3 text-sm transition-colors ${
                   isActive
@@ -72,11 +86,11 @@ function Sidebar() {
         })}
       </nav>
 
-      {/* Pie del menú */}
       <div className="px-6 py-8 text-center text-slate-300">
         <p className="text-sm font-medium">
           Municipalidad
         </p>
+
         <p className="text-xs">
           Deportes y Recreación
         </p>
@@ -87,3 +101,4 @@ function Sidebar() {
 }
 
 export default Sidebar
+

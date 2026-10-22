@@ -53,7 +53,7 @@ function InformacionColonia() {
 
   return (
     <section
-      className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-5"
+      className="grid grid-cols-1 gap-4 xl:grid-cols-5"
       aria-label="Información general de la colonia"
     >
       <article className="rounded-2xl bg-white p-6 shadow-sm xl:col-span-3">
@@ -62,7 +62,6 @@ function InformacionColonia() {
         </h2>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {/* Inicio */}
           <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-4">
             <CalendarDays size={30} className="shrink-0 text-blue-600" />
 

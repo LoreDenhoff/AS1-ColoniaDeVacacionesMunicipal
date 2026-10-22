@@ -4,19 +4,25 @@ import InformacionColonia from '../components/InformacionColonia'
 
 function InicioPage() {
   return (
-    <main className="min-h-screen bg-[#F5F9FC]">
+    <main className="flex min-h-screen flex-col bg-[#F5F9FC] xl:h-dvh xl:min-h-0">
 
-      {/* Banner de bienvenida */}
-      <BannerBienvenida />
+      {/* Banner */}
+      <div className="shrink-0">
+        <BannerBienvenida />
+      </div>
 
       {/* Contenido principal */}
-      <div className="px-6 py-8 lg:px-8">
+      <div className="flex min-h-0 flex-1 flex-col gap-4 px-5 py-4 lg:px-6">
 
         {/* Accesos rápidos */}
-        <AccesosRapidos />
+        <div className="shrink-0">
+          <AccesosRapidos />
+        </div>
 
         {/* Información de la colonia */}
-        <InformacionColonia />
+        <div className="min-h-0 flex-1">
+          <InformacionColonia />
+        </div>
 
       </div>
 
@@ -25,4 +31,5 @@ function InicioPage() {
 }
 
 export default InicioPage
+
 
