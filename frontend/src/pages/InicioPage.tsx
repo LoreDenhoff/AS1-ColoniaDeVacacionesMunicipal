@@ -1,6 +1,6 @@
-
 import BannerBienvenida from '../components/BannerBienvenida'
 import AccesosRapidos from '../components/AccesosRapidos'
+import InformacionColonia from '../components/InformacionColonia'
 
 function InicioPage() {
   return (
@@ -15,6 +15,9 @@ function InicioPage() {
         {/* Accesos rápidos */}
         <AccesosRapidos />
 
+        {/* Información de la colonia */}
+        <InformacionColonia />
+
       </div>
 
     </main>
@@ -22,3 +25,4 @@ function InicioPage() {
 }
 
 export default InicioPage
+
