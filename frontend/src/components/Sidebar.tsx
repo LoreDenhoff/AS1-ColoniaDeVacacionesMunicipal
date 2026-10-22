@@ -19,7 +19,7 @@ interface SidebarProps {
 function Sidebar({ onNavigate }: SidebarProps) {
   const opciones = [
     { nombre: 'Inicio', ruta: '/', icono: House },
-    { nombre: 'Inscripciones', ruta: '/inscripciones', icono: ClipboardList },
+    { nombre: 'Inscripciones', ruta: '/inscripciones/nueva', icono: ClipboardList },
     { nombre: 'Participantes', ruta: '/participantes', icono: Users },
     { nombre: 'Actividades', ruta: '/actividades', icono: CalendarDays },
     { nombre: 'Turnos', ruta: '/tutor/turnos', icono: Clock },
