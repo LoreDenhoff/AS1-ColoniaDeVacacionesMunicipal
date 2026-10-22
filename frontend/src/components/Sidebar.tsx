@@ -19,7 +19,8 @@ interface SidebarProps {
 function Sidebar({ onNavigate }: SidebarProps) {
   const opciones = [
     { nombre: 'Inicio', ruta: '/', icono: House },
-    { nombre: 'Inscripciones', ruta: '/inscripciones/nueva', icono: ClipboardList },
+    { nombre: 'Nueva Inscripción', ruta: '/inscripciones/nueva', icono: ClipboardList },
+    { nombre: 'Mis inscripciones', ruta: '/tutor/mis-inscripciones', icono: FileText },
     { nombre: 'Participantes', ruta: '/participantes', icono: Users },
     { nombre: 'Actividades', ruta: '/actividades', icono: CalendarDays },
     { nombre: 'Turnos', ruta: '/tutor/turnos', icono: Clock },
