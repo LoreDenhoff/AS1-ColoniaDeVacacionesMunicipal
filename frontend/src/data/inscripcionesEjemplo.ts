@@ -1,5 +1,5 @@
 
-export type EstadoInscripcion = 'Confirmada' | 'En revisión'
+export type EstadoInscripcion = 'Confirmada' | 'En revisión' | 'Lista de espera'
 
 export interface Inscripcion {
   id: number
@@ -17,6 +17,7 @@ export interface Inscripcion {
   temporada: number
   fecha_inscripcion: string
   estado: EstadoInscripcion
+  posicion_espera?: number
 }
 
 export const inscripcionesEjemplo: Inscripcion[] = [
@@ -54,4 +55,24 @@ export const inscripcionesEjemplo: Inscripcion[] = [
     fecha_inscripcion: '2026-10-21',
     estado: 'En revisión',
   },
+  
+{
+  id: 3,
+  nombre_chico: 'Martina',
+  apellido_chico: 'López',
+  dni_chico: '00000003',
+  fecha_nacimiento: '2018-03-15',
+  nombre_tutor: 'Laura',
+  apellido_tutor: 'López',
+  dni_tutor: '00000013',
+  email_tutor: 'laura@example.com',
+  telefono_tutor: '1100000003',
+  turno: 'Turno mañana',
+  sede: 'Polideportivo Municipal',
+  temporada: 2027,
+  fecha_inscripcion: '2026-10-22',
+  estado: 'Lista de espera',
+  posicion_espera: 3,
+},
+
 ]

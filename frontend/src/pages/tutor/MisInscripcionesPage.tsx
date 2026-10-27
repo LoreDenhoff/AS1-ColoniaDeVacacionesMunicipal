@@ -5,7 +5,6 @@ import InscripcionCard from '../../components/InscripcionesCard'
 import { inscripcionesEjemplo } from '../../data/inscripcionesEjemplo'
 
 function MisInscripcionesPage() {
-  // Datos ficticios hasta conectar el backend
   const inscripciones = inscripcionesEjemplo
 
   return (
@@ -13,7 +12,6 @@ function MisInscripcionesPage() {
 
       <div className="mx-auto max-w-7xl">
 
-        {/* ENCABEZADO */}
         <header className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
           <div>
@@ -36,7 +34,6 @@ function MisInscripcionesPage() {
 
         </header>
 
-        {/* LISTADO DE INSCRIPCIONES */}
         <section className="rounded-2xl bg-white p-5 shadow-sm sm:p-6">
 
           <div className="mb-5 flex items-center gap-2">
@@ -82,7 +79,6 @@ function MisInscripcionesPage() {
 
         </section>
 
-        {/* AVISO */}
         <div className="mt-6 flex items-start gap-3 rounded-xl bg-blue-50 p-4 text-sm text-blue-800">
           <Info size={20} className="shrink-0" />
 
