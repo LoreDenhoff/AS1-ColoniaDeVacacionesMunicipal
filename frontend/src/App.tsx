@@ -5,8 +5,8 @@ import DashboardLayout from './layouts/DashboardLayout'
 import InicioPage from './pages/InicioPage'
 import NuevaInscripcionPage from './pages/tutor/NuevaInscripcionPage'
 import MisInscripcionesPage from './pages/tutor/MisInscripcionesPage'
-
 import TurnosPage from './pages/tutor/TurnosPage'
+import GestionInscripcionesPage from './pages/administrativo/GestionInscripcionPage'
 
 function App() {
   return (
@@ -23,6 +23,11 @@ function App() {
           element={<NuevaInscripcionPage />}
         />
 
+        <Route
+            path="/administrativo/inscripciones"
+            element={<GestionInscripcionesPage />}
+         />
+         
         <Route
           path="/tutor/mis-inscripciones"
           element={<MisInscripcionesPage />}

@@ -20,6 +20,7 @@ function Sidebar({ onNavigate }: SidebarProps) {
   const opciones = [
     { nombre: 'Inicio', ruta: '/', icono: House },
     { nombre: 'Nueva Inscripción', ruta: '/inscripciones/nueva', icono: ClipboardList },
+    {nombre: 'Gestión de inscripciones', ruta: '/administrativo/inscripciones',icono: ClipboardList,},
     { nombre: 'Mis inscripciones', ruta: '/tutor/mis-inscripciones', icono: FileText },
     { nombre: 'Participantes', ruta: '/participantes', icono: Users },
     { nombre: 'Actividades', ruta: '/actividades', icono: CalendarDays },

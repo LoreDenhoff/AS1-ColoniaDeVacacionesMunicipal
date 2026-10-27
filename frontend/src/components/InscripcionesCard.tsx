@@ -10,15 +10,18 @@ import {
 
 import type { Inscripcion } from '../data/inscripcionesEjemplo'
 
+// Propiedades que recibe la tarjeta
 interface InscripcionCardProps {
   inscripcion: Inscripcion
 }
 
+// Formatea las fechas de YYYY-MM-DD a DD/MM/YYYY
 function formatearFecha(fecha: string) {
   const [anio, mes, dia] = fecha.split('-')
   return `${dia}/${mes}/${anio}`
 }
 
+// Componente reutilizable para mostrar un dato
 interface DatoDetalleProps {
   etiqueta: string
   valor: string
@@ -44,28 +47,45 @@ function InscripcionCard({ inscripcion }: InscripcionCardProps) {
   const confirmada = inscripcion.estado === 'Confirmada'
 
   return (
-    <article className="self-start overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-md">
+    <article className="w-full overflow-hidden rounded-xl border border-slate-200 bg-white transition-shadow hover:shadow-md">
 
-      <div className="p-5">
+      {/* RESUMEN DE LA INSCRIPCIÓN */}
+      <div className="flex flex-col gap-4 p-5 lg:flex-row lg:items-center lg:justify-between">
 
-        <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="flex min-w-0 items-start gap-3">
 
-          <div className="flex items-center gap-3">
-            <div className="rounded-xl bg-blue-100 p-3 text-blue-700">
-              <UserRound size={25} />
-            </div>
-
-            <div>
-              <h2 className="text-lg font-bold text-[#142D50]">
-                {inscripcion.nombre_chico} {inscripcion.apellido_chico}
-              </h2>
-
-              <p className="text-sm text-slate-500">
-                Inscripción #{inscripcion.id}
-              </p>
-            </div>
+          <div className="shrink-0 rounded-xl bg-blue-100 p-3 text-blue-700">
+            <UserRound size={23} />
           </div>
 
+          <div className="min-w-0">
+            <h3 className="font-bold text-[#142D50]">
+              {inscripcion.nombre_chico} {inscripcion.apellido_chico}
+            </h3>
+
+            <p className="mt-1 text-sm text-slate-500">
+              DNI: {inscripcion.dni_chico}
+            </p>
+
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+
+              <span className="inline-flex items-center gap-1">
+                <CalendarDays size={14} />
+                {inscripcion.turno} · Temporada {inscripcion.temporada}
+              </span>
+
+              <span className="inline-flex items-center gap-1">
+                <MapPin size={14} />
+                {inscripcion.sede}
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 lg:justify-end">
+
+          {/* ESTADO */}
           <span
             className={`rounded-full px-3 py-1 text-xs font-semibold ${
               confirmada
@@ -76,32 +96,13 @@ function InscripcionCard({ inscripcion }: InscripcionCardProps) {
             {inscripcion.estado}
           </span>
 
-        </div>
-
-        <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
-
-          <div className="flex items-center gap-3 text-sm text-slate-600">
-            <CalendarDays size={18} className="shrink-0 text-blue-600" />
-
-            <span>
-              {inscripcion.turno} · Temporada {inscripcion.temporada}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm text-slate-600">
-            <MapPin size={18} className="shrink-0 text-blue-600" />
-            <span>{inscripcion.sede}</span>
-          </div>
-
-        </div>
-
-        <div className="mt-5 flex justify-end">
+          {/* BOTÓN DESPLEGABLE */}
           <button
             type="button"
-            onClick={() => setExpandida(!expandida)}
+            onClick={() => setExpandida((anterior) => !anterior)}
             aria-expanded={expandida}
             aria-controls={`detalle-inscripcion-${inscripcion.id}`}
-            className="inline-flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1 text-sm font-semibold text-[#1769B3] transition hover:bg-blue-50 hover:text-blue-800"
+            className="inline-flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-[#1769B3] transition hover:bg-blue-50"
           >
             {expandida ? 'Ocultar detalle' : 'Ver detalle'}
 
@@ -111,113 +112,77 @@ function InscripcionCard({ inscripcion }: InscripcionCardProps) {
               <ChevronDown size={18} />
             )}
           </button>
+
         </div>
-
       </div>
 
-      <div
-        id={`detalle-inscripcion-${inscripcion.id}`}
-        hidden={!expandida}
-        className={expandida ? 'border-t border-slate-100 bg-slate-50/70 p-5' : ''}
-      >
+      {/* DETALLE DESPLEGABLE */}
+      {expandida && (
+        <div
+          id={`detalle-inscripcion-${inscripcion.id}`}
+          className="border-t border-slate-200 bg-slate-50/70 p-5"
+        >
 
-        <section className="mb-6">
+          {/* DATOS DEL CHICO */}
+          <section>
+            <h4 className="mb-4 text-sm font-bold text-[#142D50]">
+              Datos del participante
+            </h4>
 
-          <h3 className="mb-4 text-sm font-bold text-[#142D50]">
-            Datos del participante
-          </h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <DatoDetalle
-              etiqueta="Nombre"
-              valor={inscripcion.nombre_chico}
-            />
+              <DatoDetalle etiqueta="Nombre" valor={inscripcion.nombre_chico} />
+              <DatoDetalle etiqueta="Apellido" valor={inscripcion.apellido_chico} />
+              <DatoDetalle etiqueta="DNI" valor={inscripcion.dni_chico} />
+              <DatoDetalle
+                etiqueta="Fecha de nacimiento"
+                valor={formatearFecha(inscripcion.fecha_nacimiento)}
+              />
 
-            <DatoDetalle
-              etiqueta="Apellido"
-              valor={inscripcion.apellido_chico}
-            />
+            </div>
+          </section>
 
-            <DatoDetalle
-              etiqueta="DNI"
-              valor={inscripcion.dni_chico}
-            />
+          {/* DATOS DEL TUTOR */}
+          <section className="mt-5 border-t border-slate-200 pt-5">
+            <h4 className="mb-4 text-sm font-bold text-[#142D50]">
+              Datos del tutor
+            </h4>
 
-            <DatoDetalle
-              etiqueta="Fecha de nacimiento"
-              valor={formatearFecha(inscripcion.fecha_nacimiento)}
-            />
-          </div>
-        </section>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
 
-        <section className="mb-6 border-t border-slate-200 pt-5">
+              <DatoDetalle etiqueta="Nombre" valor={inscripcion.nombre_tutor} />
+              <DatoDetalle etiqueta="Apellido" valor={inscripcion.apellido_tutor} />
+              <DatoDetalle etiqueta="DNI" valor={inscripcion.dni_tutor} />
+              <DatoDetalle etiqueta="Correo electrónico" valor={inscripcion.email_tutor} />
+              <DatoDetalle etiqueta="Teléfono" valor={inscripcion.telefono_tutor} />
 
-          <h3 className="mb-4 text-sm font-bold text-[#142D50]">
-            Datos del tutor
-          </h3>
+            </div>
+          </section>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {/* INFORMACIÓN DE LA INSCRIPCIÓN */}
+          <section className="mt-5 border-t border-slate-200 pt-5">
+            <h4 className="mb-4 text-sm font-bold text-[#142D50]">
+              Información de la inscripción
+            </h4>
 
-            <DatoDetalle
-              etiqueta="Nombre"
-              valor={inscripcion.nombre_tutor}
-            />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-            <DatoDetalle
-              etiqueta="Apellido"
-              valor={inscripcion.apellido_tutor}
-            />
+              <DatoDetalle etiqueta="Turno" valor={inscripcion.turno} />
+              <DatoDetalle etiqueta="Sede" valor={inscripcion.sede} />
+              <DatoDetalle
+                etiqueta="Temporada"
+                valor={String(inscripcion.temporada)}
+              />
+              <DatoDetalle
+                etiqueta="Fecha de solicitud"
+                valor={formatearFecha(inscripcion.fecha_inscripcion)}
+              />
 
-            <DatoDetalle
-              etiqueta="DNI"
-              valor={inscripcion.dni_tutor}
-            />
+            </div>
+          </section>
 
-            <DatoDetalle
-              etiqueta="Correo electrónico"
-              valor={inscripcion.email_tutor}
-            />
-
-            <DatoDetalle
-              etiqueta="Teléfono"
-              valor={inscripcion.telefono_tutor}
-            />
-
-          </div>
-        </section>
-
-        <section className="border-t border-slate-200 pt-5">
-
-          <h3 className="mb-4 text-sm font-bold text-[#142D50]">
-            Información de la inscripción
-          </h3>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-            <DatoDetalle
-              etiqueta="Turno"
-              valor={inscripcion.turno}
-            />
-
-            <DatoDetalle
-              etiqueta="Sede"
-              valor={inscripcion.sede}
-            />
-
-            <DatoDetalle
-              etiqueta="Temporada"
-              valor={String(inscripcion.temporada)}
-            />
-
-            <DatoDetalle
-              etiqueta="Fecha de solicitud"
-              valor={formatearFecha(inscripcion.fecha_inscripcion)}
-            />
-
-          </div>
-        </section>
-
-      </div>
+        </div>
+      )}
 
     </article>
   )
